@@ -1,10 +1,4 @@
-# Astro Starter Kit: Basics
-
-```sh
-npm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+# Claude Community Website
 
 ## 🚀 Project Structure
 
@@ -41,6 +35,12 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## Check domain names
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+dig claude-community.kz +noall +answer -t A
+dig claude-community.kz +noall +answer -t AAAA
+dig www.claude-community.kz +nostats +nocomments +nocmd
+```
+
+
