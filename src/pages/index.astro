@@ -50,7 +50,7 @@ import Layout from '../layouts/Layout.astro';
 		</main>
 
 		<footer class="footer">
-			<p>&copy; 2025 Claude Community Kazakhstan</p>
+			<p>&copy; 2026 Built with <span class="heart" aria-label="love">&#10084;</span> and Claude by Maxim Gorbatyuk</p>
 		</footer>
 	</div>
 </Layout>
@@ -230,6 +230,10 @@ import Layout from '../layouts/Layout.astro';
 	.footer p {
 		font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
 		color: var(--fg-tertiary);
+	}
+
+	.heart {
+		color: #df6666;
 	}
 
 	@media (max-width: 480px) {
