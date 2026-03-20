@@ -7,5 +7,41 @@
         "startDate": "2026-03-01",
         "tools": ["claude", "rust"],
         "image": ""
-      }
+    },
+    {
+        "title": "Slothy Terminal",
+        "description": "Приложение-терминал для macOS с Ghostty под капотом, заточенный под AI-ассистентов. Встроенный чат с Claude, Git-клиент с визуальным графом коммитов, рабочие пространства с вкладками по проектам и боковая панель автоматизации скриптов.",
+        "author": "@maximgorbatyuk",
+        "website": "https://mgorbatyuk.dev/slothy-terminal/",
+        "startDate": "2026-02-01",
+        "tools": ["claude", "swift"],
+        "image": "https://mgorbatyuk.dev/slothy-terminal/assets/SlothyTerminalIcon.jpg"
+    },
+    {
+        "title": "EV Charge Tracker",
+        "description": "iOS-приложение для владельцев электромобилей. Отслеживает зарядки на домашних и общедоступных станциях, считает стоимость километра и показывает статистику расходов. Все данные хранятся локально на устройстве.",
+        "author": "@maximgorbatyuk",
+        "website": "https://mgorbatyuk.dev/ev-charging-tracker/",
+        "startDate": "2025-11-01",
+        "tools": ["claude", "swift"],
+        "image": "https://mgorbatyuk.dev/ev-charging-tracker/assets/app_icon.png"
+    },
+    {
+        "title": "Journey Wallet",
+        "description": "iOS-приложение для организации путешествий. Брони транспорта и отелей, документы с офлайн-доступом, бюджет и расходы в 11 валютах, чек-листы, заметки и карта интересных мест — всё в одном приложении.",
+        "author": "@maximgorbatyuk",
+        "website": "https://mgorbatyuk.dev/journey-wallet/",
+        "startDate": "2025-12-20",
+        "tools": ["claude", "swift"],
+        "image": "https://mgorbatyuk.dev/journey-wallet/assets/journey-wallet-icon-512.jpg"
+    },
+    {
+        "title": "CreativityHub",
+        "description": "iOS-приложение для управления творческими проектами. Собирает идеи с автоопределением источника (Instagram, TikTok, Pinterest, YouTube), ведёт заметки и чек-листы, отслеживает расходы в нескольких валютах, хранит документы и логирует время работы.",
+        "author": "@maximgorbatyuk",
+        "website": "https://mgorbatyuk.dev/creativity-hub/",
+        "startDate": "2026-02-01",
+        "tools": ["claude", "swift"],
+        "image": "https://mgorbatyuk.dev/creativity-hub/assets/app_icon.jpg"
+    }
 ]

@@ -234,7 +234,6 @@ const linkCopiedLabel = t(lang, 'bwc.linkCopied');
   }
 
   .modal-image {
-    width: 100%;
     border-radius: var(--radius-lg);
     overflow: hidden;
     margin-bottom: var(--space-4);
@@ -245,8 +244,10 @@ const linkCopiedLabel = t(lang, 'bwc.linkCopied');
   }
 
   .modal-image img {
-    width: 100%;
+    max-width: 80px;
+    max-height: 80px;
     display: block;
+    border-radius: var(--radius-lg);
   }
 
   .modal-title {
