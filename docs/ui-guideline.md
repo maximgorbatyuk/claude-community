@@ -71,21 +71,21 @@ The Claude Community website should feel like a natural extension of the Claude/
 
 ### Font Families
 
+The site uses a **monospace-only** typographic approach, with JetBrains Mono for all text (loaded from Google Fonts).
+
 ```css
 :root {
-  --font-serif: 'Copernicus', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Styrene A', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  --font-serif: Georgia, 'Times New Roman', serif;
 }
 ```
 
 | Context              | Font Stack     | Notes                                           |
 |----------------------|----------------|-------------------------------------------------|
 | Display/Headings     | `--font-serif` | Used for hero headlines and major section titles |
-| Body/UI              | `--font-sans`  | All body text, navigation, buttons, labels      |
-| Code/Terminal        | `--font-mono`  | Code blocks, inline code, terminal output       |
+| Body/UI/Code         | `--font-mono`  | All body text, navigation, buttons, labels, code blocks, terminal output |
 
-> **Fallback guidance**: If Anthropic's proprietary fonts (Copernicus, Styrene A) are unavailable, use `Inter` or system fonts for sans-serif and `Georgia` for serif. For mono, `JetBrains Mono` is freely available and recommended.
+> **Note**: `--font-sans` has been removed. All body and UI text uses `--font-mono` (JetBrains Mono) for a unified monospace aesthetic.
 
 ### Font Sizes (Fluid Typography)
 
@@ -546,10 +546,9 @@ src/
   --success:           #4ade80;
   --info:              #60a5fa;
 
-  /* Typography */
-  --font-serif:        'Copernicus', Georgia, serif;
-  --font-sans:         'Styrene A', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:         'JetBrains Mono', 'SF Mono', monospace;
+  /* Typography (monospace-only) */
+  --font-mono:         'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  --font-serif:        Georgia, 'Times New Roman', serif;
   --line-height-body:  1.6;
   --line-height-heading: 1.2;
 

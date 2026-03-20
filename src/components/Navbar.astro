@@ -9,10 +9,10 @@ interface Props {
 
 const { lang, currentPath } = Astro.props;
 
-const navLinks = [
+const navLinks: { key: string; path?: string; href?: string }[] = [
   { key: 'nav.main', path: '/' },
   { key: 'nav.builtwithclaude', path: '/builtwithclaude' },
-  { key: 'nav.about', path: '/about' },
+  { key: 'nav.about', href: getLocalePath(lang, '/') + '#about-us' },
 ];
 ---
 
@@ -30,13 +30,13 @@ const navLinks = [
 
     <div class="navbar-menu" id="navbar-menu">
       <ul class="nav-links">
-        {navLinks.map(({ key, path }) => {
-          const href = getLocalePath(lang, path);
-          const isActive = currentPath === href || (href !== getLocalePath(lang, '/') && currentPath.startsWith(href));
+        {navLinks.map((link) => {
+          const href = link.href ?? getLocalePath(lang, link.path!);
+          const isActive = !link.href && (currentPath === href || (href !== getLocalePath(lang, '/') && currentPath.startsWith(href)));
           return (
             <li>
               <a href={href} class:list={['nav-link', { active: isActive }]}>
-                {t(lang, key)}
+                {t(lang, link.key)}
               </a>
             </li>
           );
