@@ -1,5 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 import { type Locale, locales, getLocalePath, getBasePath } from '../i18n';
 
 interface Props {
@@ -81,6 +82,7 @@ const ogLocaleMap: Record<Locale, string> = { ru: 'ru_RU', en: 'en_US', kk: 'kk_
 	<body>
 		<Navbar lang={lang} currentPath={currentPath} />
 		<slot />
+		<Footer lang={lang} />
 	</body>
 </html>
 

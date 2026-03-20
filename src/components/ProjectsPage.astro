@@ -27,6 +27,17 @@ const linkCopiedLabel = t(lang, 'bwc.linkCopied');
         <ProjectCard project={project} lang={lang} index={i} />
       ))}
     </div>
+    <div class="projects-cta">
+      <p class="cta-text">{t(lang, 'bwc.addProjectCta')}</p>
+      <a
+        href="https://github.com/maximgorbatyuk/claude-community/issues/new?template=suggest-project.yml"
+        class="btn-suggest"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t(lang, 'footer.suggestProject')} &rarr;
+      </a>
+    </div>
   ) : (
     <div class="projects-empty">
       <p class="empty-text">{t(lang, 'bwc.emptyState')}</p>
@@ -118,6 +129,23 @@ const linkCopiedLabel = t(lang, 'bwc.linkCopied');
     gap: var(--space-5);
     width: 100%;
     max-width: 56rem;
+  }
+
+  .projects-cta {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: var(--space-7);
+  }
+
+  .cta-text {
+    font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+    color: var(--fg-tertiary);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-4);
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .projects-empty {
