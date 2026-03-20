@@ -1,0 +1,66 @@
+name: Suggest a project
+description: Submit your project for the #builtwithclaude page
+title: "[Project]: "
+labels: ["project-suggestion"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Project title
+      placeholder: "My Awesome App"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What does the project do?
+      placeholder: "A brief description of your project..."
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: Your name or handle
+      placeholder: "@username"
+    validations:
+      required: true
+
+  - type: input
+    id: website
+    attributes:
+      label: Website URL
+      description: Link to the project
+      placeholder: "https://example.com"
+    validations:
+      required: true
+
+  - type: input
+    id: start_date
+    attributes:
+      label: Start date
+      description: When did you start the project? (optional)
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: false
+
+  - type: input
+    id: tools
+    attributes:
+      label: Tools used
+      description: Comma-separated list (optional)
+      placeholder: "claude, rust, astro"
+    validations:
+      required: false
+
+  - type: input
+    id: image
+    attributes:
+      label: Image URL
+      description: Screenshot or logo URL (optional)
+      placeholder: "https://example.com/screenshot.png"
+    validations:
+      required: false

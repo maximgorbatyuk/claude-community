@@ -11,6 +11,8 @@ const { lang } = Astro.props;
 
 const projectsJson = JSON.stringify(projects);
 const visitLabel = t(lang, 'bwc.visitProject');
+const copyLinkLabel = t(lang, 'bwc.copyLink');
+const linkCopiedLabel = t(lang, 'bwc.linkCopied');
 ---
 
 <div class="projects-page">
@@ -29,7 +31,7 @@ const visitLabel = t(lang, 'bwc.visitProject');
     <div class="projects-empty">
       <p class="empty-text">{t(lang, 'bwc.emptyState')}</p>
       <a
-        href="https://github.com/maximgorbatyuk/claude-community/issues/new?template=suggest-project.md"
+        href="https://github.com/maximgorbatyuk/claude-community/issues/new?template=suggest-project.yml"
         class="btn-suggest"
         target="_blank"
         rel="noopener noreferrer"
@@ -52,9 +54,14 @@ const visitLabel = t(lang, 'bwc.visitProject');
       <span class="modal-date" id="modal-date"></span>
     </div>
     <div class="modal-tools" id="modal-tools"></div>
-    <a class="modal-link" id="modal-link" href="#" target="_blank" rel="noopener noreferrer">
-      {visitLabel} &rarr;
-    </a>
+    <div class="modal-actions">
+      <a class="modal-link" id="modal-link" href="#" target="_blank" rel="noopener noreferrer">
+        {visitLabel} &rarr;
+      </a>
+      <button class="modal-copy" id="modal-copy" type="button">
+        {copyLinkLabel}
+      </button>
+    </div>
   </div>
 </div>
 
@@ -266,6 +273,13 @@ const visitLabel = t(lang, 'bwc.visitProject');
     color: var(--accent);
   }
 
+  .modal-actions {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   .modal-link {
     display: inline-flex;
     align-items: center;
@@ -285,6 +299,26 @@ const visitLabel = t(lang, 'bwc.visitProject');
     color: #fff;
   }
 
+  .modal-copy {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    background: transparent;
+    color: var(--fg-secondary);
+    border: 1px solid var(--border-primary);
+    cursor: pointer;
+    transition: border-color var(--transition-default), color var(--transition-default);
+  }
+
+  .modal-copy:hover {
+    border-color: var(--accent);
+    color: var(--fg-primary);
+  }
+
   @media (max-width: 480px) {
     .modal-content {
       padding: var(--space-5);
@@ -292,7 +326,7 @@ const visitLabel = t(lang, 'bwc.visitProject');
   }
 </style>
 
-<script define:vars={{ projectsJson }}>
+<script define:vars={{ projectsJson, copyLinkLabel, linkCopiedLabel }}>
   const projects = JSON.parse(projectsJson);
   const modal = document.getElementById('project-modal');
   const modalTitle = document.getElementById('modal-title');
@@ -303,10 +337,27 @@ const visitLabel = t(lang, 'bwc.visitProject');
   const modalImage = document.getElementById('modal-image');
   const modalLink = document.getElementById('modal-link');
   const modalClose = document.getElementById('modal-close');
+  const modalCopy = document.getElementById('modal-copy');
+
+  function toSlug(title) {
+    return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  function findBySlug(slug) {
+    for (var i = 0; i < projects.length; i++) {
+      if (toSlug(projects[i].title) === slug) return i;
+    }
+    return -1;
+  }
+
+  var currentSlug = '';
 
   function openModal(index) {
-    const project = projects[index];
+    var project = projects[index];
     if (!project) return;
+
+    currentSlug = toSlug(project.title);
+    history.replaceState(null, '', '#' + currentSlug);
 
     modalTitle.textContent = project.title;
     modalDescription.textContent = project.description;
@@ -316,7 +367,7 @@ const visitLabel = t(lang, 'bwc.visitProject');
 
     modalImage.innerHTML = '';
     if (project.image) {
-      const img = document.createElement('img');
+      var img = document.createElement('img');
       img.src = project.image;
       img.alt = project.title;
       modalImage.appendChild(img);
@@ -325,12 +376,15 @@ const visitLabel = t(lang, 'bwc.visitProject');
     modalTools.innerHTML = '';
     if (project.tools && project.tools.length > 0) {
       project.tools.forEach(function(tool) {
-        const span = document.createElement('span');
+        var span = document.createElement('span');
         span.className = 'tool-tag';
         span.textContent = '#' + tool;
         modalTools.appendChild(span);
       });
     }
+
+    // Reset copy button text
+    modalCopy.textContent = copyLinkLabel;
 
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
@@ -342,6 +396,8 @@ const visitLabel = t(lang, 'bwc.visitProject');
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    currentSlug = '';
+    history.replaceState(null, '', window.location.pathname);
   }
 
   // Card click handlers
@@ -357,6 +413,17 @@ const visitLabel = t(lang, 'bwc.visitProject');
     });
   });
 
+  // Copy link handler
+  modalCopy.addEventListener('click', function() {
+    var url = window.location.origin + window.location.pathname + '#' + currentSlug;
+    navigator.clipboard.writeText(url).then(function() {
+      modalCopy.textContent = linkCopiedLabel;
+      setTimeout(function() {
+        modalCopy.textContent = copyLinkLabel;
+      }, 2000);
+    });
+  });
+
   // Close handlers
   modalClose.addEventListener('click', closeModal);
 
@@ -369,4 +436,11 @@ const visitLabel = t(lang, 'bwc.visitProject');
       closeModal();
     }
   });
+
+  // Open modal from hash on page load
+  if (window.location.hash) {
+    var slug = window.location.hash.slice(1);
+    var idx = findBySlug(slug);
+    if (idx >= 0) openModal(idx);
+  }
 </script>
