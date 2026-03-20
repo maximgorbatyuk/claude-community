@@ -37,7 +37,10 @@ const terminalMessages = JSON.stringify([
     <div class="links">
       <a href="https://t.me/teamleads_kz" class="btn" target="_blank" rel="noopener noreferrer">@teamleads_kz</a>
       <a href="https://t.me/frontendkz" class="btn" target="_blank" rel="noopener noreferrer">@frontendkz</a>
-      <a href="https://t.me/cursor_kz" class="btn" target="_blank" rel="noopener noreferrer">@cursor_kz</a>
+      <span class="tooltip-wrapper">
+        <a href="https://t.me/cursor_kz" class="btn" target="_blank" rel="noopener noreferrer">@cursor_kz</a>
+        <span class="tooltip">{t(lang, 'tooltip.cursorKz')}</span>
+      </span>
     </div>
 
     <p class="chat-note">{t(lang, 'hero.chatNote')}</p>
@@ -243,6 +246,49 @@ const terminalMessages = JSON.stringify([
   }
 
 
+
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #eda100;
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: var(--radius-lg);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-default);
+    z-index: 10;
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #eda100;
+  }
+
+  .tooltip-wrapper:hover .tooltip {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tooltip {
+      transition: none;
+    }
+  }
 
   @media (max-width: 480px) {
     .hero {
