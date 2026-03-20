@@ -78,6 +78,45 @@ const ogLocaleMap: Record<Locale, string> = { ru: 'ru_RU', en: 'en_US', kk: 'kk_
 				document.documentElement.setAttribute('data-theme', theme);
 			})();
 		</script>
+
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Organization",
+					"name": "Claude Community Kazakhstan",
+					"url": "https://claude-community.kz",
+					"description": "Community for AI enthusiasts, developers, and researchers building with Claude in Kazakhstan.",
+					"sameAs": [
+						"https://github.com/maximgorbatyuk/claude-community",
+						"https://t.me/cursor_kz",
+						"https://t.me/teamleads_kz",
+						"https://t.me/frontendkz"
+					]
+				},
+				{
+					"@type": "WebSite",
+					"name": "Claude Community Kazakhstan",
+					"url": "https://claude-community.kz",
+					"inLanguage": ["ru", "en", "kk"],
+					"publisher": {
+						"@type": "Organization",
+						"name": "Claude Community Kazakhstan"
+					}
+				},
+				{
+					"@type": "WebPage",
+					"name": title,
+					"description": description,
+					"url": canonicalUrl,
+					"inLanguage": lang,
+					"isPartOf": {
+						"@type": "WebSite",
+						"url": "https://claude-community.kz"
+					}
+				}
+			]
+		})} />
 	</head>
 	<body>
 		<Navbar lang={lang} currentPath={currentPath} />

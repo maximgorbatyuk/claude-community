@@ -1,6 +1,6 @@
 name: Suggest a project
 description: Submit your project for the #builtwithclaude page
-#title: "[Project]: "
+title: "I want to suggest my project"
 labels: ["project-suggestion"]
 body:
   - type: input

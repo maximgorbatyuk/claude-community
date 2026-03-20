@@ -1,0 +1,33 @@
+# Claude Community Kazakhstan
+
+> Community for AI enthusiasts, developers, and researchers building with Claude in Kazakhstan.
+
+## About
+
+Claude Community Kazakhstan is a community that connects AI enthusiasts, developers, and researchers in Kazakhstan who build projects using Claude and Claude Code. We share knowledge, collaborate on projects, and support each other in exploring AI capabilities.
+
+## Website
+
+- URL: https://claude-community.kz
+- Languages: Russian (default), English, Kazakh
+- Source code: https://github.com/maximgorbatyuk/claude-community
+
+## Pages
+
+- [Home](https://claude-community.kz/): Main landing page with community overview
+- [Projects](https://claude-community.kz/projects/): #builtwithclaude — community projects built with Claude
+- [About](https://claude-community.kz/about/): About the community
+
+## Community Chats (Telegram)
+
+- @teamleads_kz: Team leads community
+- @frontendkz: Frontend developers community
+- @cursor_kz: Cursor/AI tools community
+
+## How to Contribute
+
+Submit a project via GitHub issue: https://github.com/maximgorbatyuk/claude-community/issues/new?template=suggest-project.yml
+
+## More Information
+
+- [Full details](https://claude-community.kz/llms-full.txt)

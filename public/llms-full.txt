@@ -1,0 +1,72 @@
+# Claude Community Kazakhstan — Full Details
+
+> Community for AI enthusiasts, developers, and researchers building with Claude in Kazakhstan.
+
+## About
+
+Claude Community Kazakhstan is a community that connects AI enthusiasts, developers, and researchers in Kazakhstan who build projects using Claude and Claude Code. The community operates through existing active Telegram chats rather than creating a separate channel, keeping the small Kazakh AI community close-knit and unified.
+
+The website is built with Astro 6, deployed to GitHub Pages at claude-community.kz, and is itself built with Claude Code.
+
+## Website Structure
+
+### Home (https://claude-community.kz/)
+The main landing page features:
+- Community introduction and description
+- Links to Telegram community chats (@teamleads_kz, @frontendkz, @cursor_kz)
+- #builtwithclaude project showcase preview
+- About section
+
+### Projects (https://claude-community.kz/projects/)
+The #builtwithclaude page showcases community projects built with Claude. Each project includes:
+- Title and description
+- Author
+- Website URL
+- Start date (optional)
+- Tools used (optional)
+- Image (optional)
+
+### About (https://claude-community.kz/about/)
+Information about the community's mission and values.
+
+## Localization
+
+The site is available in three languages:
+- Russian (default): https://claude-community.kz/
+- English: https://claude-community.kz/en/
+- Kazakh: https://claude-community.kz/kk/
+
+## Community Projects
+
+### Repolyze.app
+- Description: CLI/TUI tool written in Rust that shows contribution statistics for a Git repository or a set of repositories. Useful for team leads and tech leads to understand developer impact on a project, and for developers themselves to evaluate their contribution.
+- Author: @maximgorbatyuk
+- Website: https://repolyze.app
+- Started: 2026-03-01
+- Tools: Claude, Rust
+
+## Community Chats (Telegram)
+
+The community communicates through existing active Kazakh tech chats:
+- @teamleads_kz: Team leads and engineering managers
+- @frontendkz: Frontend developers
+- @cursor_kz: Cursor and AI-assisted development tools
+
+## Contributing
+
+Anyone can suggest a project for the #builtwithclaude page by creating a GitHub issue:
+https://github.com/maximgorbatyuk/claude-community/issues/new?template=suggest-project.yml
+
+Required fields: title, description, author, website URL
+Optional fields: start date, tools used, image URL
+
+## Technical Details
+
+- Framework: Astro 6 (static site generator)
+- Hosting: GitHub Pages
+- Domain: claude-community.kz
+- Repository: https://github.com/maximgorbatyuk/claude-community
+- Node.js: >=22.12.0
+- Styling: Pure CSS with custom properties (no Tailwind)
+- Fonts: JetBrains Mono (body/UI), Georgia (headings)
+- Theme: Dark-first with light mode support
