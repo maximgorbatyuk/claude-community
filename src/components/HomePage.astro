@@ -34,9 +34,9 @@ const terminalMessages = JSON.stringify([
     <p class="chat-invite">{t(lang, 'hero.chatInvite')}</p>
 
     <div class="links">
-      <a href="https://t.me/cursor_kz" class="btn" target="_blank" rel="noopener noreferrer">cursor_kz</a>
-      <a href="https://t.me/teamleads_kz" class="btn" target="_blank" rel="noopener noreferrer">teamleads_kz</a>
-      <a href="https://t.me/frontendkz" class="btn" target="_blank" rel="noopener noreferrer">frontendkz</a>
+      <a href="https://t.me/cursor_kz" class="btn" target="_blank" rel="noopener noreferrer">@cursor_kz</a>
+      <a href="https://t.me/teamleads_kz" class="btn" target="_blank" rel="noopener noreferrer">@teamleads_kz</a>
+      <a href="https://t.me/frontendkz" class="btn" target="_blank" rel="noopener noreferrer">@frontendkz</a>
     </div>
   </main>
 
@@ -69,11 +69,20 @@ const terminalMessages = JSON.stringify([
       </div>
 
       <div class="footer-col">
+        <h3 class="footer-heading">{t(lang, 'footer.nav')}</h3>
+        <ul class="footer-links">
+          <li><a href={getLocalePath(lang, '/')}>{t(lang, 'nav.main')}</a></li>
+          <li><a href={getLocalePath(lang, '/builtwithclaude/')}>#builtwithclaude</a></li>
+          <li><a href={getLocalePath(lang, '/about/')}>{t(lang, 'nav.about')}</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
         <h3 class="footer-heading">{t(lang, 'footer.friends')}</h3>
         <ul class="footer-links">
-          <li><a href="https://t.me/cursor_kz" target="_blank" rel="noopener noreferrer">cursor_kz</a></li>
-          <li><a href="https://t.me/teamleads_kz" target="_blank" rel="noopener noreferrer">teamleads_kz</a></li>
-          <li><a href="https://t.me/frontendkz" target="_blank" rel="noopener noreferrer">frontendkz</a></li>
+          <li><a href="https://t.me/cursor_kz" target="_blank" rel="noopener noreferrer">@cursor_kz</a></li>
+          <li><a href="https://t.me/teamleads_kz" target="_blank" rel="noopener noreferrer">@teamleads_kz</a></li>
+          <li><a href="https://t.me/frontendkz" target="_blank" rel="noopener noreferrer">@frontendkz</a></li>
         </ul>
       </div>
 
@@ -201,8 +210,9 @@ const terminalMessages = JSON.stringify([
   }
 
   .btn:hover {
-    border-color: var(--fg-tertiary);
-    color: var(--fg-primary);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
   }
 
   .btn-primary {
@@ -270,7 +280,7 @@ const terminalMessages = JSON.stringify([
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: var(--space-6);
     max-width: 64rem;
     margin: 0 auto;

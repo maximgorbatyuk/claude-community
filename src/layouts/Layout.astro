@@ -17,6 +17,8 @@ const {
 } = Astro.props;
 
 const basePath = getBasePath(currentPath);
+const canonicalUrl = `https://claude-community.kz${currentPath}`;
+const ogLocaleMap: Record<Locale, string> = { ru: 'ru_RU', en: 'en_US', kk: 'kk_KZ' };
 ---
 
 <!doctype html>
@@ -31,6 +33,20 @@ const basePath = getBasePath(currentPath);
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 		<meta name="description" content={description} />
+		<meta name="keywords" content="claude, community, kazakhstan, AI, Claude Code, разработчики, ИИ, қауымдастық" />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content="Claude Community Kazakhstan" />
+		<meta property="og:locale" content={ogLocaleMap[lang]} />
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
 		<title>{title}</title>
 
 		{locales.map((loc) => (
