@@ -1,0 +1,73 @@
+---
+import { type Locale, t } from '../i18n';
+
+interface Props {
+  lang: Locale;
+  pageTitle: string;
+}
+
+const { lang, pageTitle } = Astro.props;
+---
+
+<div class="placeholder-page">
+  <main class="placeholder-content">
+    <h1 class="placeholder-heading">{pageTitle}</h1>
+    <p class="placeholder-badge">{t(lang, 'placeholder.title')}</p>
+    <p class="placeholder-text">{t(lang, 'placeholder.description')}</p>
+  </main>
+</div>
+
+<style>
+  .placeholder-page {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .placeholder-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-secondary) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-secondary) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .placeholder-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--space-6);
+    max-width: 32rem;
+  }
+
+  .placeholder-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 1.69rem + 1.31vw, 3rem);
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+    color: var(--fg-primary);
+    margin-bottom: var(--space-5);
+  }
+
+  .placeholder-badge {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-4);
+  }
+
+  .placeholder-text {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    color: var(--fg-secondary);
+    line-height: var(--line-height-body);
+  }
+</style>

@@ -1,25 +1,50 @@
 ---
+import Navbar from '../components/Navbar.astro';
+import { type Locale, locales, getLocalePath, getBasePath } from '../i18n';
+
 interface Props {
 	title?: string;
 	description?: string;
+	lang?: Locale;
+	currentPath?: string;
 }
 
 const {
 	title = 'Claude Community Kazakhstan',
-	description = 'Claude Community Kazakhstan - connecting AI enthusiasts, developers, and researchers.',
+	description = 'Claude Community Kazakhstan — connecting AI enthusiasts, developers, and researchers.',
+	lang = 'ru',
+	currentPath = Astro.url.pathname,
 } = Astro.props;
+
+const basePath = getBasePath(currentPath);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang={lang} data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
 		<meta name="description" content={description} />
 		<title>{title}</title>
+
+		{locales.map((loc) => (
+			<link
+				rel="alternate"
+				hreflang={loc}
+				href={`https://claude-community.kz${getLocalePath(loc, basePath)}`}
+			/>
+		))}
+		<link
+			rel="alternate"
+			hreflang="x-default"
+			href={`https://claude-community.kz${basePath}`}
+		/>
 
 		<script is:inline>
 			(function () {
@@ -31,6 +56,7 @@ const {
 		</script>
 	</head>
 	<body>
+		<Navbar lang={lang} currentPath={currentPath} />
 		<slot />
 	</body>
 </html>
@@ -49,7 +75,7 @@ const {
 		--info: #60a5fa;
 
 		/* Typography */
-		--font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+		--font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 		--font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
 		--font-serif: Georgia, 'Times New Roman', serif;
 		--line-height-body: 1.6;
@@ -128,6 +154,10 @@ const {
 	body {
 		width: 100%;
 		height: 100%;
+	}
+
+	body {
+		padding-top: var(--nav-height);
 	}
 
 	a {

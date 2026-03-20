@@ -1,0 +1,242 @@
+---
+import { type Locale, t } from '../i18n';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const terminalMessages = JSON.stringify([
+  t(lang, 'terminal.msg1'),
+  t(lang, 'terminal.msg2'),
+  t(lang, 'terminal.msg3'),
+  t(lang, 'terminal.msg4'),
+  t(lang, 'terminal.msg5'),
+]);
+---
+
+<div class="page">
+  <main class="hero">
+    <div class="terminal-status" aria-hidden="true" data-messages={terminalMessages}>
+      <span class="status-symbol" id="status-symbol"></span>
+      <span class="status-text" id="status-text"></span>
+    </div>
+
+    <h1 class="title">
+      {t(lang, 'hero.title')}
+      <span class="title-accent">{t(lang, 'hero.accent')}</span>
+    </h1>
+
+    <p class="subtitle">{t(lang, 'hero.subtitle')}</p>
+
+    <p class="description">{t(lang, 'hero.description')}</p>
+
+    <div class="links">
+      <a href="https://t.me/claude_community_kz" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        {t(lang, 'btn.telegram')}
+      </a>
+      <a href="https://github.com/anthropics/claude-code" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+        {t(lang, 'btn.claudeCode')}
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>{t(lang, 'footer.copyright')}</p>
+  </footer>
+</div>
+
+<style>
+  .page {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background grid pattern */
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-secondary) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-secondary) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* Radial glow behind hero */
+  .page::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(217, 119, 87, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--space-6);
+    max-width: 40rem;
+  }
+
+  .terminal-status {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+    color: var(--fg-tertiary);
+    margin-bottom: var(--space-6);
+    letter-spacing: 0.05em;
+    min-height: 1.5em;
+  }
+
+  .status-symbol {
+    margin-right: var(--space-2);
+  }
+
+  .title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 2rem + 2vw, 4rem);
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+    color: var(--fg-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .title-accent {
+    display: block;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+    color: var(--fg-secondary);
+    margin-bottom: var(--space-5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .description {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    color: var(--fg-secondary);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-7);
+    max-width: 32rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: background var(--transition-default), color var(--transition-default), border-color var(--transition-default);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #ffffff;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    color: #ffffff;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--fg-primary);
+    border: 1px solid var(--border-primary);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--fg-tertiary);
+    color: var(--fg-primary);
+  }
+
+  .footer {
+    position: absolute;
+    bottom: var(--space-5);
+    z-index: 1;
+  }
+
+  .footer p {
+    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+    color: var(--fg-tertiary);
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--space-5);
+    }
+
+    .links {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+      max-width: 16rem;
+    }
+  }
+</style>
+
+<script>
+  const symbols = ['◈', '◓', '✽', '◐', '◑', '◒', '●', '◯', '◇', '◆', '▲', '▼'];
+  const terminalEl = document.querySelector('.terminal-status');
+  const symbolEl = document.getElementById('status-symbol');
+  const textEl = document.getElementById('status-text');
+
+  const messages: string[] = terminalEl
+    ? JSON.parse(terminalEl.getAttribute('data-messages') || '[]')
+    : [];
+
+  let symbolIndex = 0;
+  let messageIndex = 0;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReduced && symbolEl && textEl && messages.length > 0) {
+    textEl.textContent = messages[0];
+    symbolEl.textContent = symbols[0];
+
+    setInterval(() => {
+      symbolIndex = (symbolIndex + 1) % symbols.length;
+      symbolEl.textContent = symbols[symbolIndex];
+    }, 800);
+
+    setInterval(() => {
+      messageIndex = (messageIndex + 1) % messages.length;
+      textEl.textContent = messages[messageIndex];
+    }, 3000);
+  } else if (symbolEl && textEl && messages.length > 0) {
+    symbolEl.textContent = '◈';
+    textEl.textContent = messages[messages.length - 1];
+  }
+</script>

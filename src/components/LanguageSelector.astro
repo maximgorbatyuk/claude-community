@@ -1,0 +1,97 @@
+---
+import { type Locale, locales, localeNames, getLocalePath, getBasePath } from '../i18n';
+
+interface Props {
+  lang: Locale;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const basePath = getBasePath(currentPath);
+---
+
+<div class="lang-selector">
+  <button class="lang-btn" id="lang-toggle" aria-expanded="false" aria-haspopup="true">
+    {lang.toUpperCase()}
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <ul class="lang-dropdown" id="lang-dropdown" role="menu">
+    {locales.map((loc) => (
+      <li role="menuitem">
+        <a
+          href={getLocalePath(loc, basePath)}
+          class:list={['lang-option', { active: loc === lang }]}
+          aria-current={loc === lang ? 'page' : undefined}
+        >
+          {localeNames[loc]}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .lang-selector {
+    position: relative;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    color: var(--fg-secondary);
+    cursor: pointer;
+    padding: var(--space-1) var(--space-2);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: color var(--transition-default), border-color var(--transition-default);
+  }
+
+  .lang-btn:hover {
+    color: var(--fg-primary);
+    border-color: var(--border-primary);
+  }
+
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + var(--space-1));
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    list-style: none;
+    min-width: 8rem;
+    padding: var(--space-1) 0;
+    z-index: 110;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .lang-dropdown.open {
+    display: block;
+  }
+
+  .lang-option {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    color: var(--fg-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .lang-option:hover {
+    background: var(--bg-tertiary);
+    color: var(--fg-primary);
+  }
+
+  .lang-option.active {
+    color: var(--accent);
+  }
+</style>
