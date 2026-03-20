@@ -19,6 +19,7 @@ const {
 
 const basePath = getBasePath(currentPath);
 const canonicalUrl = `https://claude-community.kz${currentPath}`;
+const socialImageUrl = 'https://claude-community.kz/assets/claude-kz.jpg';
 const ogLocaleMap: Record<Locale, string> = { ru: 'ru_RU', en: 'en_US', kk: 'kk_KZ' };
 ---
 
@@ -50,10 +51,12 @@ const ogLocaleMap: Record<Locale, string> = { ru: 'ru_RU', en: 'en_US', kk: 'kk_
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content="Claude Community Kazakhstan" />
 		<meta property="og:locale" content={ogLocaleMap[lang]} />
+		<meta property="og:image" content={socialImageUrl} />
 
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImageUrl} />
 
 		<title>{title}</title>
 
