@@ -1,0 +1,74 @@
+---
+import { type Locale, t } from '../i18n';
+
+interface Project {
+  title: string;
+  description: string;
+  author: string;
+  website: string;
+  startDate?: string;
+  tools?: string[];
+  image?: string;
+}
+
+interface Props {
+  project: Project;
+  lang: Locale;
+  index: number;
+}
+
+const { project, lang, index } = Astro.props;
+---
+
+<article class="project-card" data-project-index={index} role="button" tabindex="0">
+  <h3 class="project-title">{project.title}</h3>
+  <p class="project-description">{project.description}</p>
+  <p class="project-author">{project.author}</p>
+</article>
+
+<style is:global>
+  .project-card {
+    background: var(--bg-primary);
+    border: 1px solid #1a1a1a;
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    cursor: pointer;
+    transition: border-color var(--transition-default);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+  }
+
+  .project-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .project-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 1.087rem + 0.163vw, 1.25rem);
+    font-weight: 700;
+    color: var(--fg-primary);
+    line-height: var(--line-height-heading);
+  }
+
+  .project-description {
+    font-size: 0.875rem;
+    color: var(--fg-secondary);
+    line-height: var(--line-height-body);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .project-author {
+    font-size: 0.8125rem;
+    color: var(--fg-tertiary);
+    margin-top: auto;
+  }
+</style>

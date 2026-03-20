@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t } from '../i18n';
+---
+
+<Layout title="404 — Claude Community Kazakhstan" lang="ru">
+	<div class="not-found">
+		<main class="not-found-content">
+			<p class="not-found-code">{t('ru', 'notFound.title')}</p>
+			<h1 class="not-found-heading">{t('ru', 'notFound.description')}</h1>
+			<a href="/" class="not-found-link">{t('ru', 'notFound.link')} &rarr;</a>
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.not-found {
+		min-height: calc(100vh - var(--nav-height));
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.not-found::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(var(--border-secondary) 1px, transparent 1px),
+			linear-gradient(90deg, var(--border-secondary) 1px, transparent 1px);
+		background-size: 60px 60px;
+		opacity: 0.3;
+		pointer-events: none;
+	}
+
+	.not-found-content {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		padding: var(--space-6);
+	}
+
+	.not-found-code {
+		font-family: var(--font-mono);
+		font-size: clamp(4rem, 3rem + 4vw, 8rem);
+		font-weight: 700;
+		color: var(--accent);
+		line-height: 1;
+		margin-bottom: var(--space-3);
+	}
+
+	.not-found-heading {
+		font-family: var(--font-serif);
+		font-size: clamp(1.25rem, 1.1rem + 0.65vw, 1.75rem);
+		font-weight: 700;
+		color: var(--fg-primary);
+		margin-bottom: var(--space-6);
+	}
+
+	.not-found-link {
+		display: inline-flex;
+		align-items: center;
+		padding: 10px 20px;
+		border-radius: var(--radius-md);
+		font-weight: 500;
+		font-size: 0.9375rem;
+		text-decoration: none;
+		background: var(--accent);
+		color: #fff;
+		border: 1px solid transparent;
+		transition: background var(--transition-default);
+	}
+
+	.not-found-link:hover {
+		background: var(--accent-hover);
+		color: #fff;
+	}
+</style>

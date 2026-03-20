@@ -1,3 +1,11 @@
 [
-  { "name": "Example Project", "url": "#" }
+    {
+        "title": "Repolyze.app",
+        "description": "Программка CLI/TUI, написанная на Rust, которая покажет статистику контрибьюшна в репозитории Git или наборе репозиториев. Полезна тимлидам и техлидам, чтобы понять импакт разработчиков в проект, а самим разработчикам - оценить свой вклад в проект.",
+        "author": "@maximgorbatyuk",
+        "website": "https://repolyze.app",
+        "startDate": "2026-03-01",
+        "tools": ["claude", "rust"],
+        "image": ""
+      }
 ]

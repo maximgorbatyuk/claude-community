@@ -1,0 +1,372 @@
+---
+import { type Locale, t, getLocalePath } from '../i18n';
+import ProjectCard from './ProjectCard.astro';
+import projects from '../data/projects.json';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+
+const projectsJson = JSON.stringify(projects);
+const visitLabel = t(lang, 'bwc.visitProject');
+---
+
+<div class="projects-page">
+  <header class="projects-header">
+    <h1 class="projects-heading">#builtwithclaude</h1>
+    <p class="projects-description">{t(lang, 'bwc.description')}</p>
+  </header>
+
+  {projects.length > 0 ? (
+    <div class="projects-grid">
+      {projects.map((project, i) => (
+        <ProjectCard project={project} lang={lang} index={i} />
+      ))}
+    </div>
+  ) : (
+    <div class="projects-empty">
+      <p class="empty-text">{t(lang, 'bwc.emptyState')}</p>
+      <a
+        href="https://github.com/maximgorbatyuk/claude-community/issues/new?template=suggest-project.md"
+        class="btn-suggest"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t(lang, 'footer.suggestProject')} &rarr;
+      </a>
+    </div>
+  )}
+</div>
+
+<!-- Modal lives outside .projects-page to avoid overflow:hidden trapping position:fixed -->
+<div class="modal-backdrop" id="project-modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    <div id="modal-image" class="modal-image"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p class="modal-description" id="modal-description"></p>
+    <div class="modal-meta">
+      <span class="modal-author" id="modal-author"></span>
+      <span class="modal-date" id="modal-date"></span>
+    </div>
+    <div class="modal-tools" id="modal-tools"></div>
+    <a class="modal-link" id="modal-link" href="#" target="_blank" rel="noopener noreferrer">
+      {visitLabel} &rarr;
+    </a>
+  </div>
+</div>
+
+<style>
+  .projects-page {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-8) var(--space-5) var(--space-8);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .projects-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-secondary) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-secondary) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .projects-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 40rem;
+    margin-bottom: var(--space-7);
+  }
+
+  .projects-heading {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 1.69rem + 1.31vw, 3rem);
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: var(--space-3);
+  }
+
+  .projects-description {
+    font-size: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+    color: var(--fg-secondary);
+    line-height: var(--line-height-body);
+  }
+
+  .projects-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+    width: 100%;
+    max-width: 56rem;
+  }
+
+  .projects-empty {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--space-8) var(--space-5);
+  }
+
+  .empty-text {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    color: var(--fg-tertiary);
+    margin-bottom: var(--space-5);
+  }
+
+  .btn-suggest {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid transparent;
+    transition: background var(--transition-default);
+  }
+
+  .btn-suggest:hover {
+    background: var(--accent-hover);
+    color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<style is:global>
+  #project-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5);
+  }
+
+  #project-modal.open {
+    display: flex;
+  }
+
+  .modal-content {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    max-width: 36rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background: none;
+    border: none;
+    color: var(--fg-tertiary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: var(--space-1);
+    transition: color var(--transition-default);
+  }
+
+  .modal-close:hover {
+    color: var(--fg-primary);
+  }
+
+  .modal-image {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+  }
+
+  .modal-image:empty {
+    display: none;
+  }
+
+  .modal-image img {
+    width: 100%;
+    display: block;
+  }
+
+  .modal-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 1.1rem + 0.65vw, 1.75rem);
+    font-weight: 700;
+    color: var(--fg-primary);
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-3);
+    padding-right: var(--space-6);
+  }
+
+  .modal-description {
+    font-size: 0.9375rem;
+    color: var(--fg-secondary);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--space-4);
+  }
+
+  .modal-meta {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .modal-author,
+  .modal-date {
+    font-size: 0.8125rem;
+    color: var(--fg-tertiary);
+  }
+
+  .modal-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+
+  .modal-tools:empty {
+    display: none;
+  }
+
+  .modal-tools .tool-tag {
+    font-size: 0.8125rem;
+    color: var(--fg-tertiary);
+    text-decoration: none;
+    transition: color var(--transition-default);
+    cursor: default;
+  }
+
+  .modal-tools .tool-tag:hover {
+    color: var(--accent);
+  }
+
+  .modal-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid transparent;
+    transition: background var(--transition-default);
+  }
+
+  .modal-link:hover {
+    background: var(--accent-hover);
+    color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    .modal-content {
+      padding: var(--space-5);
+    }
+  }
+</style>
+
+<script define:vars={{ projectsJson }}>
+  const projects = JSON.parse(projectsJson);
+  const modal = document.getElementById('project-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDescription = document.getElementById('modal-description');
+  const modalAuthor = document.getElementById('modal-author');
+  const modalDate = document.getElementById('modal-date');
+  const modalTools = document.getElementById('modal-tools');
+  const modalImage = document.getElementById('modal-image');
+  const modalLink = document.getElementById('modal-link');
+  const modalClose = document.getElementById('modal-close');
+
+  function openModal(index) {
+    const project = projects[index];
+    if (!project) return;
+
+    modalTitle.textContent = project.title;
+    modalDescription.textContent = project.description;
+    modalAuthor.textContent = project.author;
+    modalDate.textContent = project.startDate || '';
+    modalLink.href = project.website;
+
+    modalImage.innerHTML = '';
+    if (project.image) {
+      const img = document.createElement('img');
+      img.src = project.image;
+      img.alt = project.title;
+      modalImage.appendChild(img);
+    }
+
+    modalTools.innerHTML = '';
+    if (project.tools && project.tools.length > 0) {
+      project.tools.forEach(function(tool) {
+        const span = document.createElement('span');
+        span.className = 'tool-tag';
+        span.textContent = '#' + tool;
+        modalTools.appendChild(span);
+      });
+    }
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modalClose.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Card click handlers
+  document.querySelectorAll('.project-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      openModal(parseInt(card.getAttribute('data-project-index')));
+    });
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(parseInt(card.getAttribute('data-project-index')));
+      }
+    });
+  });
+
+  // Close handlers
+  modalClose.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+</script>
