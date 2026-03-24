@@ -44,7 +44,6 @@ const translations: Record<Locale, Record<string, string>> = {
     'about.description': 'Мы — сообщество энтузиастов ИИ, разработчиков и исследователей в Казахстане, объединённых страстью к созданию с Claude. Мы делимся знаниями, совместно работаем над проектами и помогаем друг другу в изучении возможностей ИИ.',
     'about.meta.title': 'О нас — Claude Community Kazakhstan',
     'builtwithclaude.meta.title': '#builtwithclaude — Claude Community Kazakhstan',
-    'tooltip.cursorKz': 'Да, они наши друзья',
   },
   en: {
     'meta.title': 'Claude Community Kazakhstan — AI developers and builders',
@@ -89,7 +88,6 @@ const translations: Record<Locale, Record<string, string>> = {
     'about.description': 'We are a community of AI enthusiasts, developers, and researchers in Kazakhstan united by our passion for building with Claude. We share knowledge, collaborate on projects, and support each other in exploring AI capabilities.',
     'about.meta.title': 'About — Claude Community Kazakhstan',
     'builtwithclaude.meta.title': '#builtwithclaude — Claude Community Kazakhstan',
-    'tooltip.cursorKz': 'Yep, they are our friends',
   },
   kk: {
     'meta.title': 'Claude Community Kazakhstan — AI әзірлеушілер қауымдастығы',
@@ -134,7 +132,6 @@ const translations: Record<Locale, Record<string, string>> = {
     'about.description': 'Біз — Қазақстандағы AI энтузиастары, әзірлеушілер мен зерттеушілердің қауымдастығымыз, Claude көмегімен жасауға деген құштарлықпен біріккенбіз. Біз білім бөлісеміз, жобаларда бірге жұмыс істейміз және AI мүмкіндіктерін зерттеуде бір-бірімізге көмектесеміз.',
     'about.meta.title': 'Біз туралы — Claude Community Kazakhstan',
     'builtwithclaude.meta.title': '#builtwithclaude — Claude Community Kazakhstan',
-    'tooltip.cursorKz': 'Иә, олар біздің достарымыз',
   },
 };
 

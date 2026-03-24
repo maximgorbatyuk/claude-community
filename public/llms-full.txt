@@ -13,7 +13,7 @@ The website is built with Astro 6, deployed to GitHub Pages at claude-community.
 ### Home (https://claude-community.kz/)
 The main landing page features:
 - Community introduction and description
-- Links to Telegram community chats (@teamleads_kz, @frontendkz, @cursor_kz)
+- Links to Telegram community chats (@teamleads_kz, @frontendkz)
 - #builtwithclaude project showcase preview
 - About section
 
@@ -50,7 +50,6 @@ The site is available in three languages:
 The community communicates through existing active Kazakh tech chats:
 - @teamleads_kz: Team leads and engineering managers
 - @frontendkz: Frontend developers
-- @cursor_kz: Cursor and AI-assisted development tools
 
 ## Contributing
 

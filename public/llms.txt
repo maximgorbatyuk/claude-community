@@ -22,7 +22,6 @@ Claude Community Kazakhstan is a community that connects AI enthusiasts, develop
 
 - @teamleads_kz: Team leads community
 - @frontendkz: Frontend developers community
-- @cursor_kz: Cursor/AI tools community
 
 ## How to Contribute
 
