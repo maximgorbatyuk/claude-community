@@ -14,7 +14,7 @@ Community website for Claude users in Kazakhstan — built with **Astro 6** (sta
 | `npm run build` | Production build to `./dist/` |
 | `npm run preview` | Preview production build locally |
 
-No test framework or linter is configured yet.
+No test framework or linter is configured yet. Run `npm install` before any command.
 
 ## Architecture
 
@@ -45,6 +45,7 @@ No test framework or linter is configured yet.
 | `ProjectCard.astro` | Individual project card (clickable, opens modal) |
 | `PlaceholderPage.astro` | "Coming Soon" placeholder (used by about page) |
 | `LanguageSelector.astro` | Locale dropdown in navbar |
+| `404.astro` | Custom 404 page (in `src/pages/`, not a component) |
 
 ## Design System
 
@@ -66,7 +67,7 @@ Always consult `docs/ui-guideline.md` before creating new components or modifyin
 
 ## SEO & AI
 
-- **Sitemap**: `public/sitemap.xml` — static, lists all 9 pages with hreflang cross-references
+- **Sitemap**: `public/sitemap.xml` — static, lists all pages with hreflang cross-references
 - **robots.txt**: `public/robots.txt` — allows all crawlers including AI bots (GPTBot, ClaudeBot, etc.)
 - **LLM files**: `public/llms.txt` and `public/llms-full.txt` — AI-optimized site descriptions
 - **JSON-LD**: Organization, WebSite, WebPage schemas in Layout.astro `<head>`
