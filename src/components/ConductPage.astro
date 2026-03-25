@@ -1,0 +1,182 @@
+---
+import { type Locale, t } from '../i18n';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<section class="coc">
+  <div class="coc-inner">
+    <h1 class="coc-title">{t(lang, 'conduct.title')}</h1>
+    <p class="coc-lead">{t(lang, 'conduct.lead')}</p>
+
+    <article class="coc-article">
+      <h2>{t(lang, 'conduct.pledge.title')}</h2>
+      <p>{t(lang, 'conduct.pledge.text')}</p>
+      <p>{t(lang, 'conduct.pledge.text2')}</p>
+
+      <h2>{t(lang, 'conduct.standards.title')}</h2>
+      <p>{t(lang, 'conduct.standards.positive')}</p>
+      <ul>
+        <li>{t(lang, 'conduct.standards.p1')}</li>
+        <li>{t(lang, 'conduct.standards.p2')}</li>
+        <li>{t(lang, 'conduct.standards.p3')}</li>
+        <li>{t(lang, 'conduct.standards.p4')}</li>
+        <li>{t(lang, 'conduct.standards.p5')}</li>
+      </ul>
+      <p>{t(lang, 'conduct.standards.negative')}</p>
+      <ul>
+        <li>{t(lang, 'conduct.standards.n1')}</li>
+        <li>{t(lang, 'conduct.standards.n2')}</li>
+        <li>{t(lang, 'conduct.standards.n3')}</li>
+        <li>{t(lang, 'conduct.standards.n4')}</li>
+        <li>{t(lang, 'conduct.standards.n5')}</li>
+      </ul>
+
+      <h2>{t(lang, 'conduct.enforcement.title')}</h2>
+      <p>{t(lang, 'conduct.enforcement.text')}</p>
+      <p>{t(lang, 'conduct.enforcement.text2')}</p>
+
+      <h2>{t(lang, 'conduct.scope.title')}</h2>
+      <p>{t(lang, 'conduct.scope.text')}</p>
+
+      <h2>{t(lang, 'conduct.report.title')}</h2>
+      <p>{t(lang, 'conduct.report.text')}</p>
+      <p>{t(lang, 'conduct.report.text2')}</p>
+      <p>{t(lang, 'conduct.report.text3')}</p>
+
+      <h2>{t(lang, 'conduct.guidelines.title')}</h2>
+      <ol class="coc-guidelines">
+        <li>
+          <h3>{t(lang, 'conduct.guidelines.level1.title')}</h3>
+          <p>{t(lang, 'conduct.guidelines.level1.impact')}</p>
+          <p>{t(lang, 'conduct.guidelines.level1.consequence')}</p>
+        </li>
+        <li>
+          <h3>{t(lang, 'conduct.guidelines.level2.title')}</h3>
+          <p>{t(lang, 'conduct.guidelines.level2.impact')}</p>
+          <p>{t(lang, 'conduct.guidelines.level2.consequence')}</p>
+        </li>
+        <li>
+          <h3>{t(lang, 'conduct.guidelines.level3.title')}</h3>
+          <p>{t(lang, 'conduct.guidelines.level3.impact')}</p>
+          <p>{t(lang, 'conduct.guidelines.level3.consequence')}</p>
+        </li>
+        <li>
+          <h3>{t(lang, 'conduct.guidelines.level4.title')}</h3>
+          <p>{t(lang, 'conduct.guidelines.level4.impact')}</p>
+          <p>{t(lang, 'conduct.guidelines.level4.consequence')}</p>
+        </li>
+      </ol>
+    </article>
+  </div>
+</section>
+
+<style>
+  .coc {
+    padding-top: calc(var(--nav-height) + var(--space-7));
+    padding-bottom: var(--space-8);
+    min-height: 100vh;
+  }
+
+  .coc-inner {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+  }
+
+  .coc-prompt {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+  }
+
+  .coc-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--fg-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .coc-lead {
+    font-size: 1.05rem;
+    color: var(--fg-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+  }
+
+  .coc-article h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+    font-weight: 700;
+    color: var(--fg-primary);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .coc-article p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--fg-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .coc-article ul {
+    list-style: disc;
+    margin-left: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .coc-article ul li {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--fg-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .coc-guidelines {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: var(--space-4);
+  }
+
+  .coc-guidelines > li {
+    margin-bottom: var(--space-5);
+  }
+
+  .coc-guidelines h3 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--fg-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .coc-guidelines p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--fg-secondary);
+    margin-bottom: var(--space-1);
+  }
+
+  @media (max-width: 480px) {
+    .coc {
+      padding-top: calc(var(--nav-height) + var(--space-5));
+      padding-bottom: var(--space-6);
+    }
+
+    .coc-inner {
+      padding: 0 var(--space-4);
+    }
+
+    .coc-article ul {
+      margin-left: var(--space-3);
+    }
+  }
+</style>
