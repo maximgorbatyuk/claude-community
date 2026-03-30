@@ -43,5 +43,23 @@
         "startDate": "2026-02-01",
         "tools": ["claude", "swift"],
         "image": "https://mgorbatyuk.dev/creativity-hub/assets/app_icon.jpg"
+    },
+    {
+        "title": "MarkdownReader.org",
+        "description": "Браузерный редактор и превьюер Markdown-файлов. Работает полностью на клиенте без бэкенда: split-панель с живым превью, drag-and-drop файлов, экспорт в PDF и подсчёт символов.",
+        "author": "@maximgorbatyuk",
+        "website": "https://markdownreader.org",
+        "startDate": "2026-01-24",
+        "tools": ["claude", "javascript"],
+        "image": ""
+    },
+    {
+        "title": "databasecli",
+        "description": "CLI, TUI и MCP-сервер для PostgreSQL на Rust. Безопасный read-only доступ к базам данных, проверка здоровья соединений, просмотр схемы, выполнение запросов и интерактивный терминальный интерфейс. Поддерживает интеграцию с AI-агентами вроде Claude Code.",
+        "author": "@maximgorbatyuk",
+        "website": "https://databasecli.app",
+        "startDate": "2026-03-27",
+        "tools": ["claude", "rust"],
+        "image": ""
     }
 ]

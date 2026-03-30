@@ -35,9 +35,9 @@ const terminalMessages = JSON.stringify([
     <p class="chat-invite">{t(lang, 'hero.chatInvite')}</p>
 
     <div class="links">
-      <a href="https://t.me/teamleads_kz" class="btn" target="_blank" rel="noopener noreferrer">@teamleads_kz</a>
-      <a href="https://t.me/frontendkz" class="btn" target="_blank" rel="noopener noreferrer">@frontendkz</a>
-      <a href="https://t.me/almaty_nullptr_party" class="btn" target="_blank" rel="noopener noreferrer">@almaty_nullptr_party</a>
+      <a href="https://t.me/teamleads_kz" class="btn" data-telegram="teamleads_kz" target="_blank" rel="noopener noreferrer">@teamleads_kz</a>
+      <a href="https://t.me/frontendkz" class="btn" data-telegram="frontendkz" target="_blank" rel="noopener noreferrer">@frontendkz</a>
+      <a href="https://t.me/almaty_nullptr_party" class="btn" data-telegram="almaty_nullptr_party" target="_blank" rel="noopener noreferrer">@almaty_nullptr_party</a>
     </div>
 
     <p class="chat-note">{t(lang, 'hero.chatNote')}</p>
@@ -47,7 +47,7 @@ const terminalMessages = JSON.stringify([
     <h2 class="section-title">#builtwithclaude</h2>
     <p class="project-count">{projects.length} {t(lang, 'bwc.projectsCount')}</p>
     <p class="section-description">{t(lang, 'bwc.description')}</p>
-    <a href={getLocalePath(lang, '/projects/')} class="btn btn-primary">
+    <a href={getLocalePath(lang, '/projects/')} class="btn btn-primary" data-ga-event="projects_click">
       {t(lang, 'bwc.link')}
     </a>
   </section>
@@ -295,5 +295,25 @@ const terminalMessages = JSON.stringify([
   } else if (symbolEl && textEl && messages.length > 0) {
     symbolEl.textContent = '◈';
     textEl.textContent = messages[messages.length - 1];
+  }
+
+  const ga = (window as any).gtag;
+  if (typeof ga === 'function') {
+    document.querySelectorAll<HTMLAnchorElement>('a[data-telegram]').forEach(link => {
+      link.addEventListener('click', () => {
+        ga('event', 'telegram_click', {
+          event_category: 'outbound',
+          event_label: link.getAttribute('data-telegram'),
+        });
+      });
+    });
+
+    document.querySelectorAll<HTMLAnchorElement>('a[data-ga-event]').forEach(link => {
+      link.addEventListener('click', () => {
+        ga('event', link.getAttribute('data-ga-event'), {
+          event_category: 'navigation',
+        });
+      });
+    });
   }
 </script>

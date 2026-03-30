@@ -415,6 +415,13 @@ const linkCopiedLabel = t(lang, 'bwc.linkCopied');
     // Reset copy button text
     modalCopy.textContent = copyLinkLabel;
 
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'project_card_click', {
+        event_category: 'engagement',
+        event_label: project.title,
+      });
+    }
+
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
